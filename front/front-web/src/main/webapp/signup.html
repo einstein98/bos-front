@@ -43,28 +43,29 @@
 
 				<div class="signup" ng-app="signupApp" ng-controller="signupCtrl">
 					<div class="col-md-9 signupbox">
-						<form id="customerForm" action="customer_regist.action" method="post" class="form col-md-6">
+						<form id="customerForm" action="customer_regist" method="post" class="form col-md-6">
 							<div class=" form-group">
 								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>用户昵称</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="nickname" ng-model="nickname" id="inputaccount" placeholder="请输入昵称">
+									<input type="text" class="form-control" name="name" ng-model="nickname" id="inputaccount" placeholder="请输入昵称">
 								</div>
 							</div>
 							<div class=" form-group">
 								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>手机号</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="telephone" ng-model="telephone" id="telephone" placeholder="请输入手机号">
+									<input type="text" class="form-control" name="telephone" ng-model="telephone" id="telephone" placeholder="请输入手机号" onchange="validateCode(checkcode)">
 									<span style="color:red" id="telPrompt"></span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputaccount" class="col-sm-3 control-label"><b>*</b>验证码</label>
 								<div class="col-sm-5">
-									<input type="text" class="form-control" id="inputaccount" placeholder="请输入验证码" name="checkcode">
+									<input type="text" class="form-control" id="checkcode" placeholder="请输入验证码" name="checkcode" onchange="validateCode(this)">
+									<font id="checkcodePrompt"></font>
 								</div>
 								<div class="col-sm-3 song">
 									<!-- 发送验证码按钮 -->
-									<a  href="javascript:void(0);" class="btn btn-default" onclick="getCheckCode(telephone)" id="checkcode">
+									<a  href="javascript:void(0);" class="btn btn-default" onclick="getCheckCode(telephone)" id="checkcodeButton">
 									 发送验证码
 									</a>
 								</div>
@@ -95,15 +96,15 @@
 								<div class="col-sm-offset-3 col-sm-8 song">
 									<div class="checkbox">
 										<label>
-      <input type="checkbox"> 查看并同意<a href="#"> 《速运快递服务协议》</a>
-    </label>
+									      <input type="checkbox" id="agree"/> 查看并同意<a href="#"> 《速运快递服务协议》</a>
+									    </label>
 									</div>
 
 								</div>
 							</div>
 							<div class="form-group signbtn">
 								<div class="col-sm-offset-3 col-sm-8 song">
-									<a class="btn btn-danger" href="javascript:$('#customerForm').submit();">注册</a>
+									<a class="btn btn-danger" href="javascript:void(0);" onclick="checkAndSubmit()">注册</a>
 								</div>
 							</div>
 
@@ -142,6 +143,7 @@
 		var time;
 		var timeFlag = true;
 		var clock;
+		var checkcodeFlag;
 		  function getCheckCode(obj){
 			  var pattern = new RegExp(/^1[34578]\d{9}$/);
 			  if(!pattern.test(obj.value)) {
@@ -152,7 +154,7 @@
 					  $.post("customer_sendCheckcode",{telephone:obj.value});
 					  time = 60;
 					  timeFlag = false;
-					  $('#checkcode').text(time + "秒后重新发送验证码");
+					  $('#checkcodeButton').text(time + "秒后重新发送验证码");
 					  time = time - 1;
 					  clock = setInterval("timer()", 1000);
 				  }
@@ -160,12 +162,56 @@
 		  }
 		  function timer() {
 			  if(time>=0) {
-				  $('#checkcode').text(time + "秒后重新发送验证码");
+				  $('#checkcodeButton').text(time + "秒后重新发送验证码");
 				  time = time - 1;
 			  }else {
 				  timeFlag = true;
-				  $('#checkcode').text("发送验证码");
+				  $('#checkcodeButton').text("发送验证码");
 				  clearInterval(clock);
+			  }
+		  }
+		  
+		  function validateCode(obj){
+			  if(obj.value==null || obj.value=="") {
+				  $('#checkcodePrompt').text("");
+				  return;
+			  }
+			  var pattern = new RegExp(/^\d{6}$/);
+			  
+			  if(pattern.test(obj.value)){
+				  $.ajax({
+					  async:false,
+				  	  url:'customer_validateCheckcode',
+				  	  method:'POST',
+				      data:{
+				    	  telephone:$('#telephone').val(),
+				  		  checkcode:obj.value
+				      },
+				      timeout:10000,
+				      success:function(data){
+				    	  if(data) {
+				    		  $('#checkcodePrompt').css("color","green");
+				    		  $('#checkcodePrompt').text("√");
+				    		  checkcodeFlag=true;
+				    	  }else {
+				    		  $('#checkcodePrompt').css("color","red");
+				    		  $('#checkcodePrompt').text("×");
+				    		  checkcodeFlag=false;
+				    	  }
+				      }
+				  });
+			  }else {
+				  $('#checkcodePrompt').css("color","red");
+				  $('#checkcodePrompt').text("×");
+				  checkcodeFlag=false;
+			  }
+		  }
+		  
+		  function checkAndSubmit() {
+			  if(checkcodeFlag) {
+				  if($('#agree')[0].checked){
+					  $('#customerForm').submit();
+				  }
 			  }
 		  }
 		</script>
