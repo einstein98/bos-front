@@ -16,8 +16,6 @@
 				</li>
 
 			</ul>
-
-			</ul>
 		</div>
 		<div class="tab-content container">
 			<div class="jiangli">
@@ -46,14 +44,13 @@
 				</ul>
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="one">
+						<form id="orderForm" class="form-horizontal" action="order_addOrder" method="post">
 						<!--寄件人信息 -->
 						<div class="model">
 							<div class="areatitle">
 								<h4><span class="zhezhao">寄件人信息</span></h4>
-
 							</div>
 							<div class="col-md-5">
-								<form class="form-horizontal">
 									<div class="orderinfo">
 										<div class="form-group " id="sender-group">
 											<label class="col-sm-3 control-label"><b>*</b>姓名：</label>
@@ -86,14 +83,10 @@
 
 																<!-- Tab panes -->
 																<div class="tab-content">
-																	<form class="form-inline" role="form">
-
 																		<div class="form-group col-md-5">
-
 																			<input type="password" class="form-control" id="inputPassword" placeholder="输入姓名/手机号/地址查询">
 																		</div>
 																		<button type="submit" class="btn btn-danger new">搜索</button>
-																	</form>
 																	<table class="table table-striped">
 																		<thead>
 																			<tr>
@@ -147,28 +140,25 @@
 
 											<div class="col-sm-8 province">
 												<div class="docs-methods">
-													<form class="form-inline">
 														<div id="distpicker">
 															<div class="form-group">
 																<div class="innercity">
-																	<input id="city-picker3" class="form-control" readonly type="text" value="北京市/昌平区/" data-toggle="city-picker">
+																	<input id="sendAreaInfo" name="sendAreaInfo" class="form-control" readonly type="text" data-toggle="city-picker">
 																</div>
 																<button class="btn btn-warning" id="reset" type="button" style="float: right;padding: 8px;">重置</button>
-
 															</div>
 
 														</div>
-													</form>
 												</div>
 
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="inputPassword" class="col-sm-3 control-label"><b>*</b>详细地址：</label>
+											<label for="sendAddress" class="col-sm-3 control-label"><b>*</b>详细地址：</label>
 
 											<div class="col-sm-8">
-												<input name="sendAddress" type="text" class="form-control" placeholder="街道详细（精确到门牌号） " required="required">
-
+												<input id="locationDetail1" name="sendAddress" type="text" class="form-control" placeholder="街道详细（精确到门牌号） " required="required">
+												<div id="searchResultPanel1" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
 												<p class="error">
 													请填写正确的信息
 												</p>
@@ -176,8 +166,6 @@
 										</div>
 
 									</div>
-
-								</form>
 							</div>
 							<div class="col-md-7"></div>
 						</div>
@@ -188,13 +176,12 @@
 
 							</div>
 							<div class="col-md-5">
-								<form class="form-horizontal">
 									<div class="orderinfo">
 										<div class="form-group" id="sender-group">
 											<label class="col-sm-3 control-label"><b>*</b>姓名：</label>
 
 											<div class="col-sm-8 input-group" style="padding:0 15px;">
-												<input name="sendName" type="text" class="form-control" placeholder="请输入发件人姓名" required="required">
+												<input name="recName" type="text" class="form-control" style="z-index: 0;" placeholder="请输入收件人姓名" required="required">
 												<div class="input-group-addon">
 													<button type="button" data-toggle="modal" data-target="#myModal" id="dao"><img src="images/icon/suyun/contact.png"></button>
 												</div>
@@ -221,14 +208,10 @@
 
 																<!-- Tab panes -->
 																<div class="tab-content">
-																	<form class="form-inline" role="form">
-
 																		<div class="form-group col-md-5">
-
-																			<input type="password" class="form-control" id="inputPassword" placeholder="输入姓名/手机号/地址查询">
+																			<input type="text" class="form-control" id="inputPassword" placeholder="输入姓名/手机号/地址查询">
 																		</div>
 																		<button type="submit" class="btn btn-danger new">搜索</button>
-																	</form>
 																	<table class="table table-striped">
 																		<thead>
 																			<tr>
@@ -258,15 +241,13 @@
 													</div>
 												</div>
 												<!-- Modal end -->
-
 											</div>
-
 										</div>
 										<div class="form-group" id="mobile-group">
 											<label class="col-sm-3 control-label"><b>*</b>联系方式：</label>
 
 											<div class="col-sm-8">
-												<input name="sendMobile" type="text" class="form-control" placeholder="请输入联系电话" required="required">
+												<input name="recMobile" type="text" class="form-control" placeholder="请输入收件人电话" required="required">
 
 											</div>
 										</div>
@@ -274,7 +255,7 @@
 											<label class="col-sm-3 control-label">收件公司：</label>
 
 											<div class="col-sm-8">
-												<input name="sendCompany" type="text" class="form-control" placeholder="请输入寄件公司">
+												<input name="recCompany" type="text" class="form-control" placeholder="请输入收件公司">
 											</div>
 										</div>
 										<div class="form-group">
@@ -282,18 +263,14 @@
 
 											<div class="col-sm-8 province">
 												<div class="docs-methods">
-													<form class="form-inline">
 														<div id="distpicker">
 															<div class="form-group">
 																<div class="innercity">
-																	<input id="city-picker2" class="form-control" readonly type="text" value="北京市/昌平区/" data-toggle="city-picker">
+																	<input name="recAreaInfo" id="recAreaInfo" class="form-control" readonly type="text" data-toggle="city-picker">
 																</div>
 																<button class="btn btn-warning" id="reset2" type="button" style="float: right;padding: 8px;">重置</button>
-
 															</div>
-
 														</div>
-													</form>
 												</div>
 											</div>
 										</div>
@@ -301,14 +278,11 @@
 											<label for="inputPassword" class="col-sm-3 control-label"><b>*</b>详细地址：</label>
 
 											<div class="col-sm-8">
-												<input name="sendAddress" type="text" class="form-control" placeholder="街道详细（精确到门牌号） " required="required">
-
+												<input id="locationDetail2" name="recAddress" type="text" class="form-control" placeholder="街道详细（精确到门牌号） " required="required">
+											   	<div id="searchResultPanel2" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
 											</div>
 										</div>
-
 									</div>
-
-								</form>
 							</div>
 							<div class="col-md-7"></div>
 
@@ -323,18 +297,16 @@
 
 							</div>
 							<div class="col-md-5">
-								<form class="form-horizontal">
 									<div class="orderinfo">
 										<div class="form-group" id="sender-group">
 											<label class="col-sm-3 control-label"><b>*</b>拖寄物：</label>
 
 											<div class="col-sm-8">
-												<select class="form-control">
+												<select class="form-control" name="goodsType">
 													<option>文件</option>
 													<option>衣服</option>
 													<option>食品</option>
 													<option>电子产品</option>
-
 												</select>
 
 											</div>
@@ -343,7 +315,7 @@
 											<label class="col-sm-3 control-label">重量：</label>
 
 											<div class="col-sm-8">
-												<input name="sendMobile" type="text" class="form-control" placeholder="请输入联系电话" required="required">
+												<input name="weight" type="text" class="form-control" placeholder="请输入重量" required="required">
 
 											</div>
 										</div>
@@ -351,17 +323,17 @@
 											<label class="col-sm-3 control-label">备注：</label>
 
 											<div class="col-sm-8">
-												<input name="sendCompany" type="text" class="form-control" placeholder="备注不超过20个字">
+												<input name="remark" type="text" class="form-control" placeholder="备注不超过20个字">
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-3 control-label">快递产品：</label>
 
 											<div class="col-sm-8">
-												<select class="form-control">
-													<option>顺丰当日</option>
-													<option>顺丰次日</option>
-													<option>顺丰隔日</option>
+												<select class="form-control" name="sendProNum">
+													<option>速运当日</option>
+													<option>速运次日</option>
+													<option>速运隔日</option>
 
 												</select>
 
@@ -370,374 +342,37 @@
 										<div class="form-group">
 											<label for="inputPassword" class="col-sm-3 control-label">付款方式：</label>
 											<div class="col-sm-8">
-												<select class="form-control">
+												<select class="form-control" name="payTypeNum">
 													<option>寄付日结</option>
 													<option>寄付月结</option>
 													<option>到付</option>
-
 												</select>
-
 											</div>
 										</div>
-										<p><b>增值服务</b></p>
-										<div class="form-group">
-											<label for="inputPassword" class="col-sm-3 control-label">普适型：</label>
-											<div class="col-sm-8">
-												<label class="checkbox-inline"> 
-        <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked>自取 
-    </label>
-												<label class="checkbox-inline"> 
-        <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2">保价
-
-												
-											</div>
 										</div>
-                                       <div class="form-group">
-											<label for="inputPassword" class="col-sm-3 control-label">行业型：</label>
-												<div class="col-sm-8">
-													<select class="form-control">
-														<option>我不需要</option>
-														<option>保鲜</option>
-														<option>大闸蟹</option>
-														<option>票据专送</option>
-
-													</select>
-
-												</div>
-											</div>
-
-										</div>
-
-								</form>
 								</div>
 								<div class="col-md-7"></div>
-
-							</div>
-
-							<div class="partline"></div>
-
-							<!--寄件方式 -->
-							<div class="model clearfix">
-								<div class="areatitle">
-									<h4><span class="zhezhao">寄件方式</span></h4>
-								</div>
-								<div class="col-md-5">
-									<form class="form-horizontal" name="OrderForm" ng-submit="submitForm()">
-										<div class="orderinfo">
-											<div class="form-group" id="sender-group">
-
-												<div class="col-sm-offset-3 col-sm-8">
-													<label class="checkbox"> 
-        <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked><span class="typetext">速运安排快递员上门取件</span> 
-    </label>
-
-												</div>
-											</div>
-											<div class="form-group" id="mobile-group">
-
-												<div class="col-sm-offset-3 col-sm-8">
-													<label class="checkbox"> 
-        <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" ><span class="typetext">自行联系快递员或自己上门寄件</span> 
-    </label>
-
-												</div>
-											</div>
-
-										</div>
-
-									</form>
-								</div>
-								<div class="col-md-7"></div>
-
 							</div>
 
 							<div class="partline"></div>
 
 							<!--预约-->
 							<div class="model clearfix">
-
 								<div class="col-md-5">
-									<form class="form-horizontal" name="OrderForm" ng-submit="submitForm()">
 										<div class="orderinfo">
-											<div class="form-group" id="sender-group">
-												<label class="col-sm-3 control-label">预约时间：</label>
-
-												<div class="col-sm-8">
-													<select class="form-control">
-														<option>一小时上门</option>
-
-													</select>
-
-												</div>
-											</div>
 											<div class="form-group" id="mobile-group">
 												<label class="col-sm-3 control-label">给小哥捎话：</label>
 
 												<div class="col-sm-8">
-													<input name="sendMobile" type="text" class="form-control" placeholder="有什么要提醒快递员的吗？" required="required">
+													<input name="sendMobileMsg" type="text" class="form-control" placeholder="有什么要提醒快递员的吗？" required="required">
 
 												</div>
 											</div>
-
 										</div>
-
-									</form>
 								</div>
 								<div class="col-md-7"></div>
-
 							</div>
-
-							<div class="partline"></div>
-
-							<!--新增信息：receiver-->
-							<div id="collapseOne" class="accordion-body collapse modelinfo" style="height: 0px; ">
-								<!--收件人信息 -->
-								<div class="model clearfix">
-									<div class="areatitle">
-										<h4><span class="zhezhao">收件人信息</span></h4>
-
-									</div>
-									<div class="col-md-5">
-										<form class="form-horizontal" name="OrderForm" ng-submit="submitForm()">
-											<div class="orderinfo">
-												<div class="form-group" id="sender-group">
-													<label class="col-sm-3 control-label"><b>*</b>姓名：</label>
-
-													<div class="col-sm-8 input-group" style="padding:0 15px;">
-														<input name="sendName" type="text" class="form-control" placeholder="请输入发件人姓名" ng-model="orderdata.sendName" required="required">
-														<div class="input-group-addon">
-															<button type="button" data-toggle="modal" data-target="#myModal" id="dao"><img src="images/icon/suyun/contact.png"></button>
-														</div>
-
-														<!-- Modal -->
-														<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-															<div class="modal-dialog">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
-																		<h4 class="modal-title" id="myModalLabel"><strong>从地址薄导入</strong></h4>
-																	</div>
-																	<div class="modal-body">
-																		<!-- Nav tabs -->
-																		<ul class="nav nav-tabs" role="tablist">
-																			<li role="presentation" class="active">
-																				<a href="#person" role="tab" data-toggle="tab">个人地址</a>
-																			</li>
-																			<li role="presentation">
-																				<a href="#all" role="tab" data-toggle="tab">常用地址</a>
-																			</li>
-
-																		</ul>
-
-																		<!-- Tab panes -->
-																		<div class="tab-content">
-																			<form class="form-inline" role="form">
-
-																				<div class="form-group col-md-5">
-
-																					<input type="password" class="form-control" id="inputPassword" placeholder="输入姓名/手机号/地址查询">
-																				</div>
-																				<button type="submit" class="btn btn-danger new">搜索</button>
-																			</form>
-																			<table class="table table-striped">
-																				<thead>
-																					<tr>
-																						<th>姓名</th>
-																						<th>联系方式</th>
-																						<th>公司名</th>
-																						<th>详细地址</th>
-																					</tr>
-																				</thead>
-																				<tbody>
-
-																				</tbody>
-
-																			</table>
-
-																			<div role="tabpanel" class="tab-pane active clearfix" id="person">个人地址</div>
-																			<div role="tabpanel" class="tab-pane" id="all">常用地址</div>
-
-																		</div>
-
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-																		<button type="button" class="btn btn-primary">确定</button>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<!-- Modal end -->
-
-														<p class="error" ng-if="
-					OrderForm.sendName.$error.required &&
-					OrderForm.sendName.$touched">
-															寄件人姓名不可为空
-														</p>
-
-													</div>
-
-												</div>
-												<div class="form-group" id="mobile-group">
-													<label class="col-sm-3 control-label"><b>*</b>联系方式：</label>
-
-													<div class="col-sm-8">
-														<input name="sendMobile" type="text" class="form-control" placeholder="请输入联系电话" ng-model="orderdata.sendMobile" required="required">
-
-													</div>
-												</div>
-												<div class="form-group" id="sendcompany-group">
-													<label class="col-sm-3 control-label">收件公司：</label>
-
-													<div class="col-sm-8">
-														<input name="sendCompany" type="text" class="form-control" placeholder="请输入寄件公司" ng-model="orderdata.sendCompany">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label">省市区：</label>
-
-													<div class="col-sm-8 province">
-														<div class="docs-methods">
-															<form class="form-inline">
-																<div id="distpicker">
-																	<div class="form-group">
-																		<div class="innercity">
-																			<input id="city-picker2" class="form-control" readonly type="text" value="北京市/昌平区/" data-toggle="city-picker">
-																		</div>
-																		<button class="btn btn-warning" id="reset2" type="button" style="float: right;padding: 8px;">重置</button>
-
-																	</div>
-
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<label for="inputPassword" class="col-sm-3 control-label"><b>*</b>详细地址：</label>
-
-													<div class="col-sm-8">
-														<input name="sendAddress" type="text" class="form-control" placeholder="街道详细（精确到门牌号） " ng-model="orderdata.sendAddress" required="required">
-
-													</div>
-												</div>
-
-											</div>
-
-										</form>
-									</div>
-									<div class="col-md-7"></div>
-
-								</div>
-
-								<div class="model clearfix">
-									<div class="areatitle">
-										<h4><span class="zhezhao">快件信息</span></h4>
-
-									</div>
-									<div class="col-md-5">
-										<form class="form-horizontal" name="OrderForm" ng-submit="submitForm()">
-											<div class="orderinfo">
-												<div class="form-group" id="sender-group">
-													<label class="col-sm-3 control-label"><b>*</b>拖寄物：</label>
-
-													<div class="col-sm-8">
-														<select class="form-control">
-															<option>文件</option>
-															<option>衣服</option>
-															<option>食品</option>
-															<option>电子产品</option>
-
-														</select>
-
-													</div>
-												</div>
-												<div class="form-group" id="mobile-group">
-													<label class="col-sm-3 control-label">重量：</label>
-
-													<div class="col-sm-8">
-														<input name="sendMobile" type="text" class="form-control" placeholder="请输入联系电话" required="required">
-
-													</div>
-												</div>
-												<div class="form-group" id="sendcompany-group">
-													<label class="col-sm-3 control-label">备注：</label>
-
-													<div class="col-sm-8">
-														<input name="sendCompany" type="text" class="form-control" placeholder="备注不超过20个字">
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-sm-3 control-label">快递产品：</label>
-
-													<div class="col-sm-8">
-														<select class="form-control">
-															<option>顺丰当日</option>
-															<option>顺丰次日</option>
-															<option>顺丰隔日</option>
-
-														</select>
-
-													</div>
-												</div>
-												<div class="form-group">
-													<label for="inputPassword" class="col-sm-3 control-label">付款方式：</label>
-													<div class="col-sm-8">
-														<select class="form-control">
-															<option>寄付日结</option>
-															<option>寄付月结</option>
-															<option>到付</option>
-
-														</select>
-
-													</div>
-												</div>
-												<p><b>增值服务</b></p>
-												<div class="form-group">
-													<label for="inputPassword" class="col-sm-3 control-label">普适型：</label>
-													<div class="col-sm-8">
-														<label class="checkbox-inline"> 
-        <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked>自取 
-    </label>
-														<label class="checkbox-inline"> 
-        <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2">保价
-
-												
-											</div>
-										</div>
-                                       <div class="form-group">
-											<label for="inputPassword" class="col-sm-3 control-label">行业型：</label>
-														<div class="col-sm-8">
-															<select class="form-control">
-																<option>我不需要</option>
-																<option>保鲜</option>
-																<option>大闸蟹</option>
-																<option>票据专送</option>
-
-															</select>
-
-														</div>
-													</div>
-
-												</div>
-
-										</form>
-										</div>
-										<div class="col-md-7"></div>
-
-									</div>
-
-								</div>
-
-								<div class="addorder clearfix">
-
-									<p class="text-center">
-										<a class="btn btn-danger accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">新增一单</a>
-
-									</p>
-
-								</div>
-
+						</form>
 							</div>
 
 							<div role="tabpanel" class="tab-pane fade" id="two">港澳台待定</div>
@@ -904,22 +539,102 @@
 
 					</div>
 					<div class="col-md-1 ordertj">
-						<a href="#" class="btn btn-danger">提交</a>
+						<a href="javascript:$('#orderForm').submit();" class="btn btn-danger" >提交</a>
 					</div>
 				</div>
 	</section>
 </div>
-	<script src="http://nervgh.github.io/js/es5-shim.min.js"></script>
-	<script src="http://nervgh.github.io/js/es5-sham.min.js"></script>
-	<script src="js/self/city-picker.data.js"></script>
-	<script src="js/self/city-picker.js"></script>
-	<script src="js/angular-file-upload.min.js"></script>
-	<script src="js/console-sham.min.js"></script>
-	<script src="js/self/controllers.js"></script>
-	<script src="js/self/main.js"></script>
-	<script src="js/self/effect.js"></script>
-	<script>
-		function Click() {
-			$('a[rel*=downloadr]').downloadr()
-		}
-	</script>
+<script src="http://nervgh.github.io/js/es5-shim.min.js"></script>
+<script src="http://nervgh.github.io/js/es5-sham.min.js"></script>
+<script src="js/self/city-picker.data.js"></script>
+<script src="js/self/city-picker.js"></script>
+<script src="js/angular-file-upload.min.js"></script>
+<script src="js/console-sham.min.js"></script>
+<script src="js/self/controllers.js"></script>
+<script src="js/self/main.js"></script>
+<script src="js/self/effect.js"></script>
+
+<script>
+	function Click() {
+		$('a[rel*=downloadr]').downloadr()
+	}
+	// 百度地图API功能
+	function G(id) {
+		return document.getElementById(id);
+	}
+
+	var ac1 = new BMap.Autocomplete(    //建立一个自动完成的对象
+		{"input" : "locationDetail1"});
+	var ac2 = new BMap.Autocomplete(    //建立一个自动完成的对象
+		{"input" : "locationDetail2"});
+
+	ac1.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+	var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+		
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		G("searchResultPanel1").innerHTML = str;
+	});
+
+	var myValue;
+	ac1.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+	var _value = e.item.value;
+		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		G("searchResultPanel1").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+		$.getJSON('http://api.map.baidu.com/cloudgc/v1?callback=?&ak=yCKuMnScUqbCSGt2esx2uBgAz60s3ClH&address='+myValue, function(data) {
+			var address = data.result[0].address_components;
+			$('#sendAreaInfo').citypicker('reset');
+			$('#sendAreaInfo').citypicker('destroy');
+			$("#sendAreaInfo").citypicker({
+				  province: address.province,
+				  city: address.city,
+				  district: address.district
+			});
+		})
+	});
+	
+	
+	ac2.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+	var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+		
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		}    
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+		G("searchResultPanel2").innerHTML = str;
+	});
+
+	ac2.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+	var _value = e.item.value;
+		myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+		G("searchResultPanel2").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+		$.getJSON('http://api.map.baidu.com/cloudgc/v1?callback=?&ak=yCKuMnScUqbCSGt2esx2uBgAz60s3ClH&address='+myValue, function(data) {
+			var address = data.result[0].address_components;
+			$('#recAreaInfo').citypicker('reset');
+			$('#recAreaInfo').citypicker('destroy');
+			$("#recAreaInfo").citypicker({
+				  province: address.province,
+				  city: address.city,
+				  district: address.district
+			});
+		})
+	});
+</script>

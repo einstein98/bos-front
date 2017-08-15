@@ -13,5 +13,8 @@
 	<constant name="struts.custom.i18n.resources" value="messages" />
 	
 	<package name="default" extends="json-default">
+		<global-results>
+			<result name="input" type="redirect">error.jsp</result>
+		</global-results>
 	</package>
 </struts>
